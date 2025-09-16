@@ -160,6 +160,7 @@ namespace ac_math
     const ac_fixed<2 + n_frac_bits, 2, true> c_lut[n_segments_lut] = {-.99853515625, -.82861328125, -.67724609375, -.53955078125, -.41455078125, -.298828125, -.1923828125, -.0927734375};
     const ac_fixed<0 + n_frac_bits, 0, false> x_min_lut = .5;
     const ac_fixed<1 + n_frac_bits, 1, false> x_max_lut = 1.0;
+    (void)x_max_lut; // Suppress unused variable warning
     const ac_fixed<5 + n_frac_bits, 5, false> sc_constant_lut = 16.0;
 
     // End of code outputted by ac_log_pwl_lutgen.cpp
