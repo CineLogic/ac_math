@@ -451,6 +451,8 @@ namespace ac_math
 
     typedef ac_float<W1, I1, E1, Q1> in1_type;
     typedef ac_fixed<W2, I2, S2, Q2, O2> in2_type;
+    (void)in1_type{}; // Suppress unused typedef warning
+    (void)in2_type{}; // Suppress unused typedef warning
     typedef ac_fixed<outW, outI, outS, outQ, outO> out_type;
 
     typedef typename ac::rt_2T<ac_fixed<W1, I1, true>, ac_fixed<W2, I2, S2>>::mult mprod_type;
@@ -589,6 +591,8 @@ namespace ac_math
     
     typedef ac_float<W1, I1, E1, Q1> in1_type;
     typedef ac_float<W2, I2, E2, Q2> in2_type;
+    (void)in1_type{}; // Suppress unused typedef warning
+    (void)in2_type{}; // Suppress unused typedef warning
     typedef ac_fixed<outW, outI, outS, outQ, outO> out_type;
 
     typedef typename ac::rt_2T<ac_fixed<W1, I1, true>, ac_fixed<W2, I2, true>>::mult mprod_type;
@@ -601,7 +605,7 @@ namespace ac_math
     // In either case the result will be zero, if the subn_support is false.
     bool in1_subn= !in1.is_norm();
     bool in2_subn= !in2.is_norm();
-    bool r_zero = !subn_support & (in1_subn | in2_subn);
+    bool r_zero = (!subn_support) & (in1_subn | in2_subn);
 
     // Add in1 exponent and in2 exponent. The result is called the "exponent sum" and is stored in the 
     // variable "esum"
