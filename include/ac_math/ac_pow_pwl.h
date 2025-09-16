@@ -292,17 +292,18 @@ namespace ac_math
     
     #ifdef AC_POW_PWL_CHANGE_FRAC_BITS
     // Find type of intermediate variable used to store output of x*log2(e)
-    typedef class comp_pii_exp<W, I, S, n_f_b>::pit_t input_inter_type;
+    typedef typename comp_pii_exp<W, I, S, n_f_b>::pit_t input_inter_type;
     #else
     const bool is_n_seg_po2 = !bool(n_segments_lut & (n_segments_lut - 1));
     const int extra_f_bits = is_n_seg_po2 ? ac::nbits<n_segments_lut - 1>::val : 0;
     // Find type of intermediate variable used to store output of x*log2(e)
-    typedef class comp_pii_exp<W, I, S, n_frac_bits + extra_f_bits>::pit_t input_inter_type;
+    typedef typename comp_pii_exp<W, I, S, n_frac_bits + extra_f_bits>::pit_t input_inter_type;
     #endif
     
     input_inter_type input_inter;
     // e^x = 2^(x*log2(e))
-    input_inter = input*log2e;
+    // Explicit type conversion to resolve type compatibility issues
+    input_inter = input_inter_type(input*log2e);
     ac_pow2_pwl<pwl_Q>(input_inter, output);
 
     #if !defined(__SYNTHESIS__) && defined(AC_POW_PWL_H_DEBUG)
